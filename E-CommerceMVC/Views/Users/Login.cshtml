@@ -4,12 +4,23 @@
 @{
     ViewData["Title"] = "Login";
 }
-
-<form asp-controller="Users" asp-action="Login">
+<div class="card text-white bg-primary mb-3" style="box-sizing:border-box; border-radius:15px; max-width: 100vh; padding:20px; margin:auto;padding-top:0;">
+    <form asp-controller="Users" asp-action="Login">
 
     <label asp-for="UserName" class="form-label mt-4"></label>
-    <input type="text" asp-for="UserName" placeholder="name" class="form-control" />
-
+    <input style="border-radius:5px;" type="text" asp-for="UserName" placeholder="name" class="form-control" />
     @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-    <br /><button type="submit" class="btn btn-light text-black mt-4" style="display:block">Login</button>
+    
+
+    <label asp-for="Password" class="form-label mt-4"></label>
+    <input style="border-radius:5px;" type="text" asp-for="Password" placeholder="password" class="form-control" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+    
+
+        <button type="submit" class="btn btn-light text-black mt-4" style="display:block; border-radius:5px">Login</button>
 </form>
+</div>
+<script>
+    <partial name="_ValidationScriptsPartial" />
+
+</script>

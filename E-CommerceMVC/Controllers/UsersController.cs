@@ -1,14 +1,12 @@
-﻿using E_CommerceMVC.Services.UserServices;
+﻿using E_CommerceMVC.Models.Enums;
+using E_CommerceMVC.Services.UserServices;
 using E_CommerceMVC.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Mvc;
-using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
-using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace E_CommerceMVC.Controllers
 {
-    [HandleError]
-    public class UsersController : Microsoft.AspNetCore.Mvc.Controller
+    public class UsersController :Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IUserServices _userServices;
 
@@ -25,14 +23,24 @@ namespace E_CommerceMVC.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            CreateUserFormViewModel model = new CreateUserFormViewModel();
+            CreateUserFormViewModel model = new CreateUserFormViewModel()
+            {
+                GenderList = Enum.GetValues(typeof(Gender)).Cast<Gender>().Select(g=> new SelectListItem
+                {
+                    Value = g.ToString(),
+                    Text = g.ToString()
+                })
+            };
             return View(model);
         }
         [HttpPost]
-        public IActionResult Register(CreateUserFormViewModel model) { 
-            _userServices.Register(model);
-            
-            return RedirectToAction("Index","Home");
+        public IActionResult Register(CreateUserFormViewModel model) 
+        {
+            var register = _userServices.Register(model);
+            if ( register !=null)
+                return RedirectToAction("Index", "Home");
+            ModelState.AddModelError("Username", $"Invalid username or password.");
+            return View(model);
         }
 
 
@@ -43,16 +51,14 @@ namespace E_CommerceMVC.Controllers
             
             return View(model);
         }
+
         [HttpPost]
         public IActionResult Login(LoginFormDto model)
         { 
-            _userServices.Login(model);
-            if (_userServices.Login(model)!=null)
+          var login =  _userServices.Login(model);
+            if (login != null)
             {
-               
                 return RedirectToAction("Index", "Home");
-
-
             }
             ModelState.AddModelError("Username", $"Invalid username or password.");
             return View(model);

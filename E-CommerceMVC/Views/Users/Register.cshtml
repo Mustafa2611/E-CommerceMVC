@@ -4,15 +4,33 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+<div class="card text-white bg-primary mb-3" style="box-sizing:border-box; border-radius:15px; max-width: 100vh; padding:20px; margin:auto;padding-top:0; ">
 <form asp-controller="Users" asp-action="Register">
 
-    <label asp-for="UserName" class="form-label mt-4"></label>
-    <input type="text" asp-for="UserName" placeholder="name" class="form-control" />
+    <label asp-for="UserName" class="form-label mt-4" ></label>
+    <input style="border-radius:5px;" type="text" asp-for="UserName" placeholder="name" class="form-control mb-2 " />
+    <span asp-validation-for="UserName" class="text-danger "></span>
 
+   
+    <label asp-for="Password" class="form-label mt-4"></label>
+    <input style="border-radius:5px;" type="password" asp-for="Password" placeholder="Password" class="form-control mb-2" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    <label asp-for="SelectedGender" class="form-label mt-4"></label>
+    <select asp-for="SelectedGender" asp-items="Model.GenderList" class="form-select mb-2" style="border-radius:5px;">
+    <option></option>
+    </select>
+    <span asp-validation-for="SelectedGender" class="text-danger"></span>
+   
 
     <label asp-for="age" class="form-label mt-4"></label>
-    <input type="number" asp-for="age" placeholder="age" class="form-control" />
+    <input style="border-radius:5px;" type="number" asp-for="age" placeholder="age" value="" class="form-control mb-2" />
+    <span asp-validation-for="age" class="text-danger"></span>
 
-    <button type="submit" class="btn btn-light text-black mt-4">Register</button>
+
+        <button type="submit" class="btn btn-light text-black mt-4" style="border-radius:5px;">Register</button>
 </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
