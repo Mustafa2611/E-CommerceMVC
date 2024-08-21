@@ -7,9 +7,9 @@ namespace E_CommerceMVC.Services.CategoryServices
     public interface ICategoryServices
     {
 
-        void Create(CreateCategoryDto viewModel);
-        void Update(CreateCategoryDto viewModel);
-        void Delete(CreateCategoryDto viewModel);
+        void Create(CreateCategoryViewModel viewModel);
+        void Update(CreateCategoryViewModel viewModel);
+        void Delete(CreateCategoryViewModel viewModel);
 
         IEnumerable<SelectListItem> GetSelectListItem();
         IEnumerable<Category> GetAllCategories();

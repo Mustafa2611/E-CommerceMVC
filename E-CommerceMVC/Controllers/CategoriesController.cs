@@ -21,12 +21,12 @@ namespace E_CommerceMVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            CreateCategoryDto modelView = new CreateCategoryDto();
+            CreateCategoryViewModel modelView = new CreateCategoryViewModel();
             return View(modelView);
         }
 
         [HttpPost]
-        public IActionResult Create(CreateCategoryDto modelView)
+        public IActionResult Create(CreateCategoryViewModel modelView)
         {
             _categoryServices.Create(modelView);
             return RedirectToAction("Index", "Categories");
@@ -42,11 +42,11 @@ namespace E_CommerceMVC.Controllers
         [HttpGet]
         public IActionResult Update()
         {
-            CreateCategoryDto viewModel = new CreateCategoryDto();
+            CreateCategoryViewModel viewModel = new CreateCategoryViewModel();
             return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Update(CreateCategoryDto viewModel)
+        public IActionResult Update(CreateCategoryViewModel viewModel)
         {
             _categoryServices.Update(viewModel);
             return RedirectToAction("Index", "Categories");
@@ -55,14 +55,14 @@ namespace E_CommerceMVC.Controllers
         [HttpGet]
         public IActionResult Delete()
         {
-            DeleteCategoryDto viewModel = new()
+            DeleteCategoryViewModel viewModel = new()
             {
                 Categories = _categoryServices.GetSelectListItem()
             };
             return View(viewModel);
         }
         //[HttpPost]
-        public IActionResult Delete(DeleteCategoryDto viewModel)
+        public IActionResult Delete(DeleteCategoryViewModel viewModel)
         {
              _categoryServices.Delete(viewModel);
             return RedirectToAction("Index" , "Categories");

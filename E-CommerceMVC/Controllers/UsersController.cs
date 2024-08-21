@@ -47,13 +47,13 @@ namespace E_CommerceMVC.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            LoginFormDto model = new LoginFormDto();
+            LoginFormViewModel model = new LoginFormViewModel();
             
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Login(LoginFormDto model)
+        public IActionResult Login(LoginFormViewModel model)
         { 
           var login =  _userServices.Login(model);
             if (login != null)

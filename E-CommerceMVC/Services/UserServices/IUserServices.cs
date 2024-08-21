@@ -6,7 +6,7 @@ namespace E_CommerceMVC.Services.UserServices
     public interface IUserServices
     {
         User Register(CreateUserFormViewModel viewModel);
-        User Login(LoginFormDto viewModel);
+        User Login(LoginFormViewModel viewModel);
         void Logout();
     }
 }

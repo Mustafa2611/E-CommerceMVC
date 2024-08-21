@@ -2,7 +2,7 @@
 
 namespace E_CommerceMVC.ViewModels.Categories
 {
-    public class DeleteCategoryDto : CreateCategoryDto
+    public class DeleteCategoryViewModel : CreateCategoryViewModel
     {
         public IEnumerable<SelectListItem> Categories =  Enumerable.Empty<SelectListItem>();
     }

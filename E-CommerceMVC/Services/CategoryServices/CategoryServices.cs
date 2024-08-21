@@ -14,7 +14,7 @@ namespace E_CommerceMVC.Services.CategoryServices
             _context = context;
         }
 
-        public void Create(CreateCategoryDto viewModel)
+        public void Create(CreateCategoryViewModel viewModel)
         {
             var Category = new Category { 
                 CategoryId = viewModel.CategoryId ,
@@ -25,7 +25,7 @@ namespace E_CommerceMVC.Services.CategoryServices
             _context.SaveChanges();
         }
 
-        public void Delete(CreateCategoryDto viewModel)
+        public void Delete(CreateCategoryViewModel viewModel)
         {
             var Category = new Category
             {
@@ -47,7 +47,7 @@ namespace E_CommerceMVC.Services.CategoryServices
             return _context.Categories.ToList();
         }
 
-        public void Update(CreateCategoryDto viewModel)
+        public void Update(CreateCategoryViewModel viewModel)
         {
             var Category = new Category
             {

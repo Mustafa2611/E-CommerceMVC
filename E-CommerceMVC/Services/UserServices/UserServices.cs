@@ -41,7 +41,7 @@ namespace E_CommerceMVC.Services.UserServices
         }
 
 
-        public User Login(LoginFormDto viewModel)
+        public User Login(LoginFormViewModel viewModel)
         {
             User user = _context.Users.FirstOrDefault(u=> u.UserName == viewModel.UserName && u.Password == viewModel.Password);
 
