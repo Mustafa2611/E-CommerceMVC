@@ -1,0 +1,63 @@
+﻿@using E_CommerceMVC.ViewModels.Products
+@model UpdateProductFormViewModel
+
+<h5 class="mt-2">Update Product</h5>
+
+<form asp-controller="Products" asp-action="Update" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+
+            <label asp-for="ProductId" class="form-label mt-4"></label>
+            <select class="form-select" asp-for="ProductId" asp-items="Model.Products">
+                <option></option>
+            </select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+
+            <label asp-for="ProductName" class="form-label mt-4"></label>
+            <input type="text" asp-for="ProductName" class="form-control" placeholder="Name" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+
+            <label asp-for="BrandId" class="form-label mt-4"></label>
+            <select class="form-select" asp-for="BrandId" asp-items="Model.Brands">
+                <option></option>
+            </select>
+            <span asp-validation-for="BrandId" class="text-danger"></span>
+
+            <label asp-for="SelectedCategories" class="form-label mt-4"></label>
+            <select class="form-select" asp-for="SelectedCategories" asp-items="Model.Categories">
+                <option></option>
+            </select>
+            <span asp-validation-for="SelectedCategories" class="text-danger"></span>
+
+            <label asp-for="Stock" class="form-label mt-4"></label>
+            <input type="number" asp-for="Stock" class="form-control" placeholder="Stock" />
+            <span asp-validation-for="Stock" class="text-danger"></span>
+
+
+            <label asp-for="Price" class="form-label mt-4"></label>
+            <input type="number" asp-for="Price" class="form-control" placeholder="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+
+            <label asp-for="Cover" class="form-label mt-4"></label><br />
+            <input type="file" class="form-control btn btn-outline-info" asp-for="Cover" />
+            <span asp-validation-for="Cover" class="text-danger"></span>
+
+        </div>
+        <div class="col-md-6  d-flex justify-content-center">
+            <img alt="Cover" class="cover-preview d-none" />
+        </div>
+        <button type="submit" class="btn btn-light text-black mt-4">Save</button>
+    </div>
+
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            $('#Cover').on('change', function () {
+                $('.cover-preview').attr('src', window.URL.createObjectURL(this.files[0])).removeClass('d-none');
+            });
+        });
+    </script>
+}

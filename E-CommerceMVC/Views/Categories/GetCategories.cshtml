@@ -1,0 +1,22 @@
+﻿@using E_CommerceAPI.Models
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<h5>All CAtegories</h5>
+<div class="row mt-5">
+    @foreach (var category in Model)
+    {
+        <div class="row">
+            <div class="card border-success mb-3" style="max-width : 20rem;">
+                <div class="card-body">
+                    <p>Category Id : @category.CategoryId
+                        <br />Category Name : @category.CategoryName
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

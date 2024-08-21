@@ -1,0 +1,23 @@
+﻿@using E_CommerceMVC.ViewModels.Categories
+@model DeleteCategoryDto
+
+
+<h5>Delete Category</h5>
+
+
+<form asp-controller="Categories">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="CategoryId" class="form-label mt-4"></label>
+            <select class="form-select" asp-for="CategoryId" asp-items="Model.Categories">
+                <option></option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-light text-black mt-4">
+            Delete
+        </button>
+        <div class="col-md-6"></div>
+    </div>
+
+</form>

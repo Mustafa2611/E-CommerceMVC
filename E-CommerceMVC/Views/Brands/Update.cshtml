@@ -1,0 +1,26 @@
+﻿@using E_CommerceMVC.ViewModels.Brands
+@model CreateBrandFormViewModel
+
+@{
+    ViewData["Title"] = "Update Brand";
+}
+
+<h5>Update Brand </h5>
+
+
+<form asp-controller="Brands">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="BrandId" class="form-label mt-4"></label>
+            <input type="number" asp-for="BrandId" class="form-control" placeholder="Id" />
+            <span asp-validation-for="BrandId" class="text-danger"></span>
+
+            <label asp-for="BrandName" class="form-label mt-4"></label>
+            <input type="text" asp-for="BrandName" class="form-control" placeholder="Name" />
+            <span asp-validation-for="BrandName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-light text-black mt-4">Save</button>
+        <div class="col-md-6"></div>
+    </div>
+
+</form>

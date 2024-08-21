@@ -1,0 +1,19 @@
+﻿@using E_CommerceMVC.ViewModels.Categories
+@model CreateCategoryDto
+
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<form asp-controller="Categories">
+    <div class="row">
+        <div calss="col-md-6">
+
+            <label asp-for="CategoryName" class="form-lable mb-4"></label>
+            <input type="text" asp-for="CategoryName" class="form-control" placeholder="name" />
+            <span asp-validation-for="CategoryName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-light text-black mt-4">Save</button>
+    </div>
+</form>

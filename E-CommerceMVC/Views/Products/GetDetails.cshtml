@@ -1,0 +1,47 @@
+﻿@using E_CommerceAPI.Models
+@model IEnumerable<Product>
+
+    @{
+        ViewData["Title"] = "Products Details";
+    }
+
+<table class="table table-hover">
+    <thead >
+        <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Brand Name</th>
+            <th scope="col">Categories</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Cover</th>
+        </tr>
+    </thead>
+
+    @foreach (var product in Model)
+    {
+
+        <tbody>
+            <tr class="table-info">
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.Brand.BrandName</td>
+                <td>
+                    @foreach (var category in product.Categories)
+                    {
+                        @category.CategoryName <br>
+                    }
+                </td>
+                <td>@product.Price</td>
+                <td>@product.Stock</td>
+                <td><img src="@($"/assets/images/{product.Cover}")" /></td>
+            </tr>
+        </tbody>
+
+
+
+
+        <div class="row mt-5 d-inline-grid">
+        </div>
+    }
+</table>

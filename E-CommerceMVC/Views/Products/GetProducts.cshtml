@@ -1,0 +1,28 @@
+﻿@using E_CommerceAPI.Models
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Products Details";
+}
+
+<h5>All Products</h5> 
+<div class="row mt-5">
+@foreach(var product in Model)
+{
+    <div class="row">
+        <div class="card border-success mb-3" style="max-width : 20rem;">
+            <div class="card-body">
+                <p>Product Id: @product.ProductId
+                <br>@product.ProductName
+                <br />Brand Id: @product.BrandId
+                <br />Categories:
+                @foreach (var category in product.Categories)
+                {
+                   <br > @category.CategoryName
+                }
+                <br />@product.Price
+                <br />@product.Stock</p>
+            </div>
+        </div>
+    </div>
+} 
+</div>

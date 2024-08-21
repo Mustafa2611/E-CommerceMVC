@@ -1,0 +1,60 @@
+﻿@using E_CommerceMVC.ViewModels.Products
+
+@model CreateProductFormViewModel
+
+
+<h5 class="mt-2">Add Product</h5>
+
+<form asp-controller="Products" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 m-3">
+            <label asp-for="ProductName" class="form-label mt-4"></label>
+            <input type="text" asp-for="ProductName" class="form-control mb-2" placeholder="Name" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+            <br />
+            <label asp-for="BrandId" class="form-label mt-4"></label>
+            <select class="form-select mb-2" asp-for="BrandId" asp-items="Model.Brands">
+                <option></option>
+            </select>
+            <span asp-validation-for="BrandId" class="text-danger"></span>
+            <br />
+            <label asp-for="SelectedCategories" class="form-label mt-4"></label>
+            <select class="form-select mb-2" asp-for="SelectedCategories" asp-items="Model.Categories">
+                <option></option>
+            </select>
+            <span asp-validation-for="SelectedCategories" class="text-danger"></span>
+            <br />
+            <label asp-for="Stock" class="form-label mt-4"></label>
+            <input type="number" asp-for="Stock" class="form-control mb-2" placeholder="Stock" value="" />
+            <span asp-validation-for="Stock" class="text-danger"></span>
+            <br />
+
+            <label asp-for="Price" class="form-label mt-4"></label>
+            <input type="number" asp-for="Price" class="form-control mb-2 " placeholder="Price" value="" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+            <br />
+            <label asp-for="Cover" class="form-label mt-4"></label><br />
+            <input type="file" class="form-control mb-2 btn btn-outline-info" asp-for="Cover" />
+            <span asp-validation-for="Cover" class="text-danger"></span>
+            <br />
+        </div>
+        <div class="col-md-6  d-flex justify-content-center">        
+            <img alt="Cover" class="cover-preview d-none" />
+        </div>
+        <button type="submit" class="btn btn-primary " asp-action="Create">Save</button>
+    </div>
+   
+
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#Cover').on('change', function () {
+                $('.cover-preview').attr('src', window.URL.createObjectURL(this.files[0])).removeClass('d-none');
+            });
+        });
+    </script>
+}
+
