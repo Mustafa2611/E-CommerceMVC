@@ -30,7 +30,10 @@ namespace E_CommerceMVC.Controllers
         [HttpGet("/Cart")]
         public IActionResult GetItems()
         {
-            return View(_orderServices.AllOrderItems());
+            var model = _orderServices.AllOrderItems();
+            if(model == null) 
+                return BadRequest();
+            return View(model);
         }
 
         [HttpPost]

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace E_CommerceMVC.Controllers
 {
-    public class UsersController :Microsoft.AspNetCore.Mvc.Controller
+    public class UsersController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IUserServices _userServices;
 
@@ -25,7 +25,7 @@ namespace E_CommerceMVC.Controllers
         {
             CreateUserFormViewModel model = new CreateUserFormViewModel()
             {
-                GenderList = Enum.GetValues(typeof(Gender)).Cast<Gender>().Select(g=> new SelectListItem
+                GenderList = Enum.GetValues(typeof(Gender)).Cast<Gender>().Select(g => new SelectListItem
                 {
                     Value = g.ToString(),
                     Text = g.ToString()
@@ -34,10 +34,10 @@ namespace E_CommerceMVC.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Register(CreateUserFormViewModel model) 
+        public IActionResult Register(CreateUserFormViewModel model)
         {
             var register = _userServices.Register(model);
-            if ( register !=null)
+            if (register != null)
                 return RedirectToAction("Index", "Home");
             ModelState.AddModelError("Username", $"Invalid username or password.");
             return View(model);
@@ -48,14 +48,14 @@ namespace E_CommerceMVC.Controllers
         public IActionResult Login()
         {
             LoginFormViewModel model = new LoginFormViewModel();
-            
+
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Login(LoginFormViewModel model)
-        { 
-          var login =  _userServices.Login(model);
+        {
+            var login = _userServices.Login(model);
             if (login != null)
             {
                 return RedirectToAction("Index", "Home");
@@ -68,7 +68,7 @@ namespace E_CommerceMVC.Controllers
         public IActionResult Logout()
         {
             _userServices.Logout();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -1,9 +1,13 @@
+using E_CommerceAPI.Models;
 using E_CommerceMVC.Data;
 using E_CommerceMVC.Services.BrandServices;
 using E_CommerceMVC.Services.CategoryServices;
 using E_CommerceMVC.Services.OrderServices;
 using E_CommerceMVC.Services.ProductServices;
 using E_CommerceMVC.Services.UserServices;
+
+//using E_CommerceMVC.Services.UserServices;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceMVC
@@ -20,20 +24,31 @@ namespace E_CommerceMVC
             var ConnectionStrings = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("No Connection String was found.");
 
             builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(ConnectionStrings));
+            builder.Services.AddIdentity<User, IdentityRole>(options=>
+            {
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
 
             builder.Services.AddScoped<IProductServices,ProductServices>();
             builder.Services.AddScoped<IBrandServices, BrandServices>();
             builder.Services.AddScoped<ICategoryServices, CategoryServices>();
             builder.Services.AddScoped<IUserServices, UserServices>();
             builder.Services.AddScoped<IOrderServices, OrderServices>();
+            //builder.Services.AddScoped<ILogger>(); 
 
 
             //builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 
             builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
-            builder.Services.AddSession(o =>
-                o.IdleTimeout = TimeSpan.FromMinutes(1800)
-                );
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -51,6 +66,7 @@ namespace E_CommerceMVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

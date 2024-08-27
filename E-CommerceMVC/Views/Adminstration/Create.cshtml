@@ -1,0 +1,22 @@
+﻿@using E_CommerceMVC.ViewModels.Roles
+@model CreateRoleViewModel
+
+@{
+    ViewData["Title"] = "Create Role";
+}
+<div class="card text-white bg-primary mb-3" style="box-sizing:border-box; border-radius:15px; max-width: 100vh; padding:20px; margin:auto;padding-top:0;">
+    <form asp-controller="Adminstration" asp-action="Create">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <label asp-for="RoleName" class="form-label mt-4"></label>
+        <input style="border-radius:5px;" type="text" asp-for="RoleName" placeholder="name" class="form-control" />
+        @Html.ValidationMessageFor(m => m.RoleName, "", new { @class = "text-danger" })
+
+
+        <button type="submit" class="btn btn-light text-black mt-4" style="display:block; border-radius:5px">Create</button>
+    </form>
+</div>
+<script>
+    <partial name="_ValidationScriptsPartial" />
+
+</script>

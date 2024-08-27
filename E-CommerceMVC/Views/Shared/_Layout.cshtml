@@ -1,4 +1,7 @@
-﻿@inject IHttpContextAccessor Context
+﻿@using E_CommerceAPI.Models
+@using Microsoft.AspNetCore.Identity
+@inject IHttpContextAccessor Context
+@inject SignInManager<User> SignInManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +25,8 @@
                     <ul class="navbar-nav flex-grow-1">
                        
                         
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">
-                                Home            <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                       
                         
-                        @if (Context.HttpContext.Session.GetString("Username") == "admin")
+                        @if (User.Identity.Name == "admin")
                         {
                             <li class="nav-item">
                                 <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">
@@ -52,11 +49,22 @@
                                     <span class="visually-hidden">(current)</span>
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link " asp-controller="Adminstration" asp-action="Index">
+                                    Roles
+                                    <span class="visually-hidden">(current)</span>
+                                </a>
+                            </li>
 
                         }
-                        else if (Context.HttpContext.Session.GetString("Username") != null)
+                        else if (SignInManager.IsSignedIn(User) && Context.HttpContext.Session.GetString("Username")!=null)
+
                         {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">
+                                    Home            <span class="visually-hidden">(current)</span>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link " asp-controller="Orders" asp-action="GetItems">
                                     Cart
@@ -66,12 +74,12 @@
                         }
 
                         <div style="display:flex; justify-content: space-between; align-items: center; margin-left: auto; ">
-                       
-                        @if (Context.HttpContext.Session.GetString("Username") ==null)
+
+                        @if (!SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item " >
                                 
-                                <a class="nav-link  " asp-controller="Users" asp-action="Login">
+                                <a class="nav-link  " asp-controller="Accounts" asp-action="Login">
                                     <button type="button" class="btn btn-outline-dark" style="margin: -15px;">
                                         Login
                                     </button>
@@ -85,7 +93,7 @@
                         {
                             <li class="nav-item">
 
-                                <a class="nav-link " asp-controller="Users" asp-action="Logout" style="margin: -15px;">
+                                <a class="nav-link " asp-controller="Accounts" asp-action="Logout" style="margin: -15px;">
                                     <button type="button" class="btn btn-outline-dark">
                                         Logout
                                     </button>
@@ -95,7 +103,7 @@
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link " asp-controller="Users" asp-action="Register" style="margin: -15px;">
+                            <a class="nav-link " asp-controller="Accounts" asp-action="RegisterIdentity" style="margin: -15px;">
                                 <button type="button" class="btn btn-outline-dark">
                                     Register
                                 </button>

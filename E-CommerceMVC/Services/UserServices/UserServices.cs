@@ -23,14 +23,14 @@ namespace E_CommerceMVC.Services.UserServices
             User user = new()
             {
                 UserName = viewModel.UserName,
-                Password = viewModel.Password,
+                PasswordHash = viewModel.Password,
                 Gender = viewModel.SelectedGender,
                 Age = viewModel.age
             };
 
-            
-           
-            if (user == null )
+
+
+            if (user == null)
                 return null;
 
             _context.Users.Add(user);
@@ -43,7 +43,9 @@ namespace E_CommerceMVC.Services.UserServices
 
         public User Login(LoginFormViewModel viewModel)
         {
-            User user = _context.Users.FirstOrDefault(u=> u.UserName == viewModel.UserName && u.Password == viewModel.Password);
+            User user = _context.Users.FirstOrDefault(u => u.UserName == viewModel.UserName
+            && u.PasswordHash == viewModel.Password
+            );
 
             if (user == null)
                 return null;

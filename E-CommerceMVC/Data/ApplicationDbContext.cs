@@ -1,9 +1,11 @@
 ﻿using E_CommerceAPI.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceMVC.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext( DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -21,15 +23,14 @@ namespace E_CommerceMVC.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().ToTable("Users");
+            //modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Product>().ToTable("Products").Property(p => p.Price).HasPrecision(18, 2);
             modelBuilder.Entity<Product>().HasMany(x => x.Categories).WithMany(x => x.Products).
                 UsingEntity<ProductCategories>();
             modelBuilder.Entity<Brand>().ToTable("Brands");
             modelBuilder.Entity<Category>().ToTable("Categories");
             modelBuilder.Entity<ProductCategories>().ToTable("ProductCategories").HasKey(x => x.Id);
-            modelBuilder.Entity<ProductCategories>().HasIndex(x=> new { x.ProductId , x.CategoryId}).IsUnique();
-            //modelBuilder.Entity<ProductCategories>().HasIndex(x => x.CategoryId).IsUnique(false);
+            modelBuilder.Entity<ProductCategories>().HasIndex(x => new { x.ProductId, x.CategoryId }).IsUnique();
 
 
             modelBuilder.Entity<Order>().ToTable("Orders").Property(o => o.TotalAmount).HasPrecision(18, 2);

@@ -56,7 +56,9 @@ namespace E_CommerceMVC.Services.OrderServices
             Product product = _context.Products.Find(ProductId) ?? throw new Exception("Product not Found.");
             if (user != null)
             {
-                Order currentOrder = _context.Orders.Where(o => o.UserId == user.UserId && o.Completion == "No").SingleOrDefault();
+                Order currentOrder = _context.Orders.Where(o =>
+                o.UserId == user.Id && 
+                o.Completion == "No").SingleOrDefault();
                 OrderItem item = new OrderItem()
                 {
                     Order = currentOrder,
@@ -78,10 +80,14 @@ namespace E_CommerceMVC.Services.OrderServices
         public IEnumerable<OrderItem> AllOrderItems()
         {
             var username = _contextAccessor.HttpContext.Session.GetString("Username");
-            User user = _context.Users.Where(u => u.UserName == username).FirstOrDefault() ?? throw new Exception("not found");
-            if (user != null)
+            User user = _context.Users.Where(u => u.UserName == username).FirstOrDefault();
+            if (user == null)
             {
-                Order currentOrder = _context.Orders.Where(o => o.UserId == user.UserId && o.Completion == "No").SingleOrDefault() ?? throw new Exception("not found") ;
+                return null;
+            }
+           else
+            {
+                Order currentOrder = _context.Orders.Where(o => o.UserId == user.Id && o.Completion == "No").SingleOrDefault() ?? throw new Exception("not found");
                 var items = _context.OrderItems.Include(i => i.Order).Include(i => i.Product).Where(i => i.OrderId == currentOrder.OrderId).ToList();
 
                 return items;

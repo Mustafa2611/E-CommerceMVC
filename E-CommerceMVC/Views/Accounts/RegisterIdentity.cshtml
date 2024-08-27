@@ -1,0 +1,42 @@
+﻿@using E_CommerceMVC.ViewModels.Account
+@model RegisterViewModel
+
+
+<div class="card text-white bg-primary mb-3" style="box-sizing:border-box; border-radius:15px; max-width: 100vh; padding:20px; margin:auto;padding-top:0; ">
+    <form asp-controller="Accounts" asp-action="RegisterIdentity" method="post">
+       <div asp-validation-summary="All" class="text-danger mt-2" ></div> 
+
+        <label asp-for="Name" class="form-label mt-4"></label>
+        <input style="border-radius:5px;" type="text" asp-for="Name" placeholder="name" class="form-control mb-2 " />
+        <span asp-validation-for="Name" class="text-danger "></span>
+
+        <label asp-for="EmailAddress" class="form-label mt-4"></label>
+        <input style="border-radius:5px;" type="email" asp-for="EmailAddress" placeholder="Email" class="form-control mb-2 " />
+        <span asp-validation-for="EmailAddress" class="text-danger "></span>
+
+        <label asp-for="Password" class="form-label mt-4"></label>
+        <input style="border-radius:5px;" type="password" asp-for="Password" placeholder="Password" class="form-control mb-2" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <label asp-for="ConfirmPassword" class="form-label mt-4"></label>
+        <input style="border-radius:5px;" type="password" asp-for="ConfirmPassword" placeholder="Password" class="form-control mb-2" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        <label asp-for="SelectedGender" class="form-label mt-4"></label>
+        <select asp-for="SelectedGender" asp-items="Model.GenderList" class="form-select mb-2" style="border-radius:5px;">
+            <option></option>
+        </select>
+        <span asp-validation-for="SelectedGender" class="text-danger"></span>
+
+
+        <label asp-for="age" class="form-label mt-4"></label>
+        <input style="border-radius:5px;" type="number" asp-for="age" placeholder="age" value="" class="form-control mb-2" />
+        <span asp-validation-for="age" class="text-danger"></span>
+
+
+        <button type="submit" class="btn btn-light text-black mt-4" style="border-radius:5px;">Register</button>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

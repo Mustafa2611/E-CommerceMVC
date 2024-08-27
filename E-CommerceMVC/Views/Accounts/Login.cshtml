@@ -1,13 +1,14 @@
-﻿@using E_CommerceMVC.ViewModels.Users
-@model LoginFormViewModel
+﻿@using E_CommerceMVC.ViewModels.Account
+@model LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
 }
 <div class="card text-white bg-primary mb-3" style="box-sizing:border-box; border-radius:15px; max-width: 100vh; padding:20px; margin:auto;padding-top:0;">
-    <form asp-controller="Users" asp-action="Login">
+    <form asp-controller="Accounts" asp-action="Login">
+        <div asp-validation-summary="All" class="text-danger"></div>
 
-    <label asp-for="UserName" class="form-label mt-4"></label>
+        <label asp-for="UserName" class="form-label mt-4"></label>
     <input style="border-radius:5px;" type="text" asp-for="UserName" placeholder="name" class="form-control" />
     @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
     
@@ -16,6 +17,12 @@
     <input style="border-radius:5px;" type="password" asp-for="Password" placeholder="password" class="form-control" />
     <span asp-validation-for="Password" class="text-danger"></span>
     
+    <div class="checkbox">
+            <label asp-for="RememberMe" class="form-label mt-4">
+                <input asp-for="RememberMe" />
+                @Html.DisplayNameFor(m => m.RememberMe )
+        </label>
+    </div>
 
         <button type="submit" class="btn btn-light text-black mt-4" style="display:block; border-radius:5px">Login</button>
 </form>

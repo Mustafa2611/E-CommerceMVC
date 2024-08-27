@@ -48,18 +48,28 @@ namespace E_CommerceMVC.Services.ProductServices
                 Cover = coverName
             };
             _context.Products.Add(product);
-
+            _context.SaveChanges();
             List<ProductCategories> productCategories = new List<ProductCategories>();
             foreach (var category in product.Categories)
             {
+                //var exsitingRelation = _context.ProductCategories.FirstOrDefault(pc => pc.ProductId == product.ProductId && pc.CategoryId == category.CategoryId);
+                //if (exsitingRelation == null)
+                //{
+                //    _context.ProductCategories.Add(new ProductCategories 
+                //    {
+                //        Category = category,
+                //        Product= product,
+                //    });
+
+                //}
                 productCategories = new List<ProductCategories>()
-                {
-                    new ProductCategories
                     {
-                        Category = category,
-                        Product = product
-                    }
-                };
+                        new ProductCategories
+                        {
+                            Category = category,
+                            Product = product
+                        }
+                    };
             }
              _context.ProductCategories.AddRange(productCategories);
              _context.SaveChanges();
