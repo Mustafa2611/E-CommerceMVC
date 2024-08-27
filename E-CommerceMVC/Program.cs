@@ -4,9 +4,7 @@ using E_CommerceMVC.Services.BrandServices;
 using E_CommerceMVC.Services.CategoryServices;
 using E_CommerceMVC.Services.OrderServices;
 using E_CommerceMVC.Services.ProductServices;
-using E_CommerceMVC.Services.UserServices;
 
-//using E_CommerceMVC.Services.UserServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,12 +38,9 @@ namespace E_CommerceMVC
             builder.Services.AddScoped<IProductServices,ProductServices>();
             builder.Services.AddScoped<IBrandServices, BrandServices>();
             builder.Services.AddScoped<ICategoryServices, CategoryServices>();
-            builder.Services.AddScoped<IUserServices, UserServices>();
             builder.Services.AddScoped<IOrderServices, OrderServices>();
-            //builder.Services.AddScoped<ILogger>(); 
 
 
-            //builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 
             builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             builder.Services.AddSession();

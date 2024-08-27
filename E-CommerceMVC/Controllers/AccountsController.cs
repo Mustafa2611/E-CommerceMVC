@@ -61,7 +61,6 @@ namespace E_CommerceMVC.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-                //RegisterIdentity();
             }
             return View(model);
         }
